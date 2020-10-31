@@ -11,6 +11,7 @@ include('process.php');
 			$age = $n['age'];
 			$username = $n['username'];
 			$address = $n['address'];
+			$picture = $n['picture'];
 	
 
 	}
@@ -33,6 +34,7 @@ include('process.php');
 			<th>Age</th>
 			<th>Username</th>
 			<th>Address</th>
+			<th>Picture</th>
 			<th colspan="2">Action</th>
 		</tr>
 	</thead>
@@ -43,6 +45,7 @@ include('process.php');
 			<td><?php echo $row['age']; ?></td>
 			<td><?php echo $row['username']; ?></td>
 			<td><?php echo $row['address']; ?></td>
+			<td><img src="<?php echo "pictures/".$row['picture']?>" alt="No image" width='50' height='50'></td>
 			<td>
 				<a href="index.php?edit=<?php echo $row['id']; ?>" class="edit_btn" >Edit</a>
 			</td>
@@ -55,7 +58,7 @@ include('process.php');
 	
 
 
-<form method="post" action="process.php" >
+<form method="post" action="process.php" enctype="multipart/form-data" >
 
 	<input type="hidden" name="id" value="<?php echo $id; ?>">
 
@@ -74,6 +77,10 @@ include('process.php');
 	<div class="input-group">
 		<label>Address</label>
 		<input type="text" name="address" value="<?php echo $address; ?>">
+	</div>
+	<div class="input-group">
+		<label>Picture</label>
+		<input type="file" name="file" src="<?php echo "pictures/ ".$picture; ?>">
 	</div>
 	<div class="input-group">
 
