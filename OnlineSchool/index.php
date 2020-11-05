@@ -42,12 +42,12 @@
 					</span>
 
 					<div class="wrap-input100">
-						<input class="input100" type="text" name="name" placeholder="Fullname" id='name'>
+						<input class="input100" type="text" placeholder="Fullname" id='name'>
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100">
-						<input class="input100" type="password" name="pass" placeholder="Password" id='password'>
+						<input class="input100" type="password" placeholder="Password" id='password'>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
@@ -64,11 +64,11 @@
 						</button>
 					</div>
 
-					<!-- <div class="text-center p-t-90">
-						<a class="txt1" href="#">
-							Forgot Password?
+					<div class="text-center p-t-90">
+						<a class="txt1" href="register.php">
+							Register User
 						</a>
-					</div> -->
+					</div>
 				</form>
 			</div>
 		</div>
@@ -98,18 +98,18 @@
 </body>
 <script type='text/javascript'>
 	$(document).ready(function(){
-		alert("hi");
 		$('#login').on('click', function(e){
 			e.preventDefault();
 			var name=$('#name').val();
 			var password=$('#password').val();
+			console.log(name + " " +password)
 			$.ajax({
 				url:'function.php',
 				method:'POST',
 				data:{
-					submit:'staff_login',
-					name:name,
-					password:password
+					'submit':'staff_login',
+					'name':name,
+					'password':password
 				},
 				success:function(response){
 					if (response=='Director') {

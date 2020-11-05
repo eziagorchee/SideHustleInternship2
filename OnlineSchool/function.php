@@ -11,10 +11,14 @@ function create_staff($role){
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $password = md5($password);
     $department= mysqli_real_escape_string($con, $_POST['department']);
-    $sql = mysqli_query($con, "INSERT INTO ict staff(Name, Password,Department,Role) VALUES('$name', '$password','$department','$role')");
+    $sql = mysqli_query($con, "INSERT INTO `ict staff` (Name, Password,Department,Role) VALUES('$name', '$password','$department','$role')");
     if($sql){
-        $_SESSION['name'] = $name;
+        if($role == 'Director'){
+           $_SESSION['name'] = $name; 
+        }
         echo "success";
+    }else{
+        echo "error";
     }
 }
 
@@ -30,8 +34,9 @@ function create_students(){
     $department= mysqli_real_escape_string($con, $_POST['department']);
     $sql = mysqli_query($con, "INSERT INTO students(name, password,department,matric_number,year_of_entry,year_of_graduation) VALUES('$name', '$password','$department','$matric_number','$year_of_entry','$year_of_graduation')");
     if($sql){
-        $_SESSION['name'] = $name;
         echo "success";
+    }else{
+        echo "error";
     }
 
     
@@ -42,14 +47,16 @@ function staff_login(){
     $name= mysqli_real_escape_string($con, $_POST['name']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $password = md5($password);
-    $sql = mysqli_query($con, "SELECT * FROM ict staff WHERE Name = '$username' AND Password = '$password' ");
+    $sql = mysqli_query($con, "SELECT * FROM `ict staff` WHERE Name = '$name' AND Password = '$password' ");
     if($sql){
         if($result = mysqli_fetch_assoc($sql)){
+            $_SESSION['name'] = $result['Name'];
             echo $result['Role'];
         }else{
-        echo "User does not exit";
+            echo "User does not exit";
         }
-
+    }else{
+        echo "Sql Error";
     }
 
 
